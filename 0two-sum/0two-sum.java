@@ -1,4 +1,5 @@
 class Solution {
+    //use a hashmap to store the index and number. this will bring down time complexity to O(n)
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i < nums.length; i++)
