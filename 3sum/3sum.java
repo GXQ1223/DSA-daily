@@ -25,12 +25,8 @@ class Solution {
                 int c = -nums[i]-nums[j];
                 if(map.containsKey(c) && (map.get(c) > i && map.get(c) < j)){
                     set.add(new int[]{nums[i], c, nums[j]});
-                    System.out.println ("notcontain:" + nums[i] + ";" + c + ";" + nums[j]);
-                    System.out.println();
                 } else if(map.containsKey(c) && map.get(c) == i && count.get(c) > 1) {
                     set.add(new int[]{nums[i], c, nums[j]});
-                    System.out.println( "contains:" + nums[i] + ";" + c + ";" + nums[j]);
-                    System.out.println();
                 }
                 while(j-1>=0 && nums[j-1] == nums[j]) j--;
             }
