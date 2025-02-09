@@ -9,10 +9,7 @@ class Solution {
             if(height[l] < height[r])l++;
             else r--;
         }
-        
-        
-        
-        return res;
-        
+
+        return res;        
     }
 }
