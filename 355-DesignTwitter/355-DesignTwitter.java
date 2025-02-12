@@ -28,14 +28,11 @@ class Twitter {
     
     public void postTweet(int userId, int tweetId) {
 
-        if(!users.containsKey(userId)){
+        if(!users.containsKey(userId))
             users.put(userId, new User(userId));
-        }
         Tweet tweet = new Tweet(userId, tweetId);
-        // System.out.println("userId: " + userId + "; tweetId: " + tweetId);
         newsFeed.addFirst(tweet);
 
-        // System.out.println("newsFeed size: " + newsFeed.size());
     }
     
     public List<Integer> getNewsFeed(int userId) {
