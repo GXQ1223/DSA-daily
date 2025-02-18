@@ -8,7 +8,7 @@ class Solution {
                 start = i; break;
             }
         }
-        System.out.println(start);
+        // System.out.println(start);
         //perform binary search
         int l = start; 
         int r = start + n - 1;
