@@ -6,8 +6,6 @@ class Solution {
         while(finalS.length() < pattern.length()+1){
             for(int i = 1; i < 10; i++){
                 s += (char)(i+'0');
-                // System.out.println("s: " + s);
-                // System.out.println("i: " + (char)(i+'0'));
                 used[i] = true;
                 if(pattern.length() == 0) break;
                 if(makeSense(s, pattern, used)){
@@ -24,10 +22,14 @@ class Solution {
     }
 
     public boolean makeSense(String s, String pattern, boolean[] used){
-        if(pattern.length() == 0) {System.out.println("final s: " + s); finalS = s; return true;}
+        if(pattern.length() == 0) {
+            // System.out.println("final s: " + s); 
+            finalS = s; 
+            return true;
+        }
         if(s.charAt(s.length()-1) == '9' && pattern.charAt(0) == 'I') return false;
         if(s.charAt(s.length()-1) == '0' && pattern.charAt(0) == 'D') return false;
-        System.out.println("s: " + s);
+        // System.out.println("s: " + s);
         for(int i = 1; i < 10; i++){
             if(!used[i]){
                 if(pattern.charAt(0) == 'I' && s.charAt(s.length()-1) < i + '0'){
