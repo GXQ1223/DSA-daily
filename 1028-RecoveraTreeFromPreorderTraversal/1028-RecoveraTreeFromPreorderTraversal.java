@@ -45,7 +45,7 @@ class Solution {
             //find parent
             if(lvl>0){
                 TreeNode parent = map.get(lvl-1).peek();
-                System.out.println("parent: " + parent.val + "; node: " + node.val + "; lvl: " + lvl);
+                // System.out.println("parent: " + parent.val + "; node: " + node.val + "; lvl: " + lvl);
                 if(parent.left == null) parent.left = node;
                 else if(parent.right == null && lvl > 1) {
                     parent.right = node; 
