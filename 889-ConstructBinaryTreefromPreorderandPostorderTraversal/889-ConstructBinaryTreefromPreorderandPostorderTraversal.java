@@ -1,23 +1,22 @@
 class Solution {
+    int index;
     public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
-        int[] index = new int[]{0};
-        return construct(preorder, postorder, index, 0, preorder.length - 1);
+        index = 0;
+        return construct(preorder, postorder, 0, preorder.length - 1);
     }
-    private TreeNode construct(int[] preorder, int[] postorder, int[] index, int l, int h){
-        if(index[0] >= preorder.length || l > h)
-            return null;
+    private TreeNode construct(int[] preorder, int[] postorder, int l, int r){
+        System.out.println("left: " + l + ";r: " + r);
+        if(l > r) return null;
 
-        TreeNode root = new TreeNode(preorder[index[0]++]);
-        if(l == h) return root;
+        TreeNode root = new TreeNode(preorder[index++]);
+        if(l == r) return root;
 
         int i;
-        for(i = l; i <= h; i++){
-            if(postorder[i] == preorder[index[0]]) break;
+        for(i = l; i <= r; i++){
+            if(postorder[i] == preorder[index]) break;
         }
-        if(l <= h){
-            root.left = construct(preorder, postorder, index, l, i);
-            root.right = construct(preorder, postorder, index, i + 1, h - 1);
-        }
+        root.left = construct(preorder, postorder, l, i);
+        root.right = construct(preorder, postorder, i + 1, r - 1);
         return root;
     }
 }
