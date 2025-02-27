@@ -5,7 +5,7 @@ class Solution {
         return construct(preorder, postorder, 0, preorder.length - 1);
     }
     private TreeNode construct(int[] preorder, int[] postorder, int l, int r){
-        System.out.println("left: " + l + ";r: " + r);
+        // System.out.println("left: " + l + ";r: " + r);
         if(l > r) return null;
 
         TreeNode root = new TreeNode(preorder[index++]);
