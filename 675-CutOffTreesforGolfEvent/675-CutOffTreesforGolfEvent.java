@@ -49,7 +49,7 @@ class Solution {
             for(int i = 0; i < len; i++){
                 int[]top = toVisit.poll();
 
-                if((top[0] + "," + top[1]).equals(target)) return res ;
+                if(top[0] == end[0] && top[1] == end[1]) return res ;
                 // System.out.println("res:" + res);
 
                 int row = top[0];
