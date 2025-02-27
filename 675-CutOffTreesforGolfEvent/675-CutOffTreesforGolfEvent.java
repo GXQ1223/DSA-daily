@@ -42,6 +42,8 @@ class Solution {
         toVisit.add(start);
 
         while(!toVisit.isEmpty()){
+            int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Up, Down, Left, Right
+
             int len = toVisit.size();
             // System.out.println("len: " + len);
             for(int i = 0; i < len; i++){
@@ -52,17 +54,15 @@ class Solution {
 
                 int row = top[0];
                 int col = top[1];
-                // Check left
-                if (col - 1 >= 0 && !visited[row][col - 1] && matrix[row][col - 1] >= 1) 
-                    {toVisit.offer(new int[]{row, col - 1}); visited[row][col - 1] = true;}
-                // Check right
-                if (col + 1 < matrix[0].length && !visited[row][col + 1] && matrix[row][col + 1] >= 1) 
-                    {toVisit.offer(new int[]{row, col + 1}); visited[row][col + 1] = true;}
-                // Add up and down checks if needed
-                if (row - 1 >= 0 && !visited[row - 1][col] && matrix[row - 1][col] >= 1) 
-                    {toVisit.offer(new int[]{row - 1, col}); visited[row - 1][col] = true;}
-                if (row + 1 < matrix.length && !visited[row + 1][col] && matrix[row + 1][col] >= 1) 
-                    {toVisit.offer(new int[]{row + 1, col}); visited[row + 1][col] = true;}
+                for (int[] dir : directions) {
+                    int newRow = row + dir[0];
+                    int newCol = col + dir[1];
+                    if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n &&
+                        !visited[newRow][newCol] && matrix[newRow][newCol] >= 1) {
+                        toVisit.offer(new int[]{newRow, newCol});
+                        visited[newRow][newCol] = true;
+                    }
+                }
             }
             res++;
         }
