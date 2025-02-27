@@ -1,83 +1,71 @@
-import java.util.*;
-
 class Solution {
     public int cutOffTree(List<List<Integer>> forest) {
-        // Special case: Starting position is blocked
-        if (forest.get(0).get(0) == 0) return -1;
-
-        // Initialize priority queue to sort trees by height
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        //special case
+        if(forest.get(0).get(0) == 0) return -1;
+        PriorityQueue<int[]>pq = new PriorityQueue<>((a,b) -> a[0] - b[0]);
         int m = forest.size();
         int n = forest.get(0).size();
+        int[][]matrix = new int[m][n];
 
-        // Add all trees to the priority queue
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                int height = forest.get(i).get(j);
-                if (height > 1) { // Only add trees (height > 1)
-                    pq.offer(new int[]{height, i, j});
-                }
+        //initialize the matrix and pq
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                int cur = forest.get(i).get(j);
+                matrix[i][j] = cur;
+                if(cur > 1) pq.offer(new int[]{cur, i, j});
             }
         }
 
-        // Start from the initial position (0, 0)
-        int[] start = new int[]{0, 0};
-        int totalSteps = 0;
-
-        // Process trees in order of height
-        while (!pq.isEmpty()) {
-            int[] nextTree = pq.poll();
-            int[] end = new int[]{nextTree[1], nextTree[2]};
-
-            // Perform BFS to find the shortest path from start to end
-            int steps = bfs(forest, start, end);
-            if (steps == -1) return -1; // If no path exists, return -1
-
-            totalSteps += steps; // Add steps to the total
-            start = end; // Move to the next tree
+        int res = bfs(new int[]{1,0,0}, pq.peek(), matrix);
+        while(pq.size() > 1){
+            int step = bfs(pq.poll(), pq.peek(), matrix);
+            // System.out.println("step: " + step);
+            if(step == -1) return -1;
+            res += step;
         }
+        return res;
 
-        return totalSteps;
     }
 
-    private int bfs(List<List<Integer>> forest, int[] start, int[] end) {
-        int m = forest.size();
-        int n = forest.get(0).size();
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Up, Down, Left, Right
-        boolean[][] visited = new boolean[m][n]; // Track visited cells
-        Queue<int[]> queue = new LinkedList<>();
-
-        queue.offer(start);
+    private int bfs(int[]cur, int[]next, int[][]matrix){
+        int[]start = new int[]{cur[1], cur[2]};
+        int[]end = new int[]{next[1], next[2]};
+        int m = matrix.length;
+        int n = matrix[0].length;
+        // System.out.println("start: " + start[0] + ";" + start[1]);
+        // System.out.println("end: " + end[0] + ";" + end[1]);
+        int res = 0;
+        String target = end[0] + "," + end[1];
+        boolean[][] visited = new boolean[m][n];
+        LinkedList<int[]>toVisit = new LinkedList<>();
         visited[start[0]][start[1]] = true;
-        int steps = 0;
+        toVisit.add(start);
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                int[] current = queue.poll();
+        while(!toVisit.isEmpty()){
+            int len = toVisit.size();
+            // System.out.println("len: " + len);
+            for(int i = 0; i < len; i++){
+                int[]top = toVisit.poll();
 
-                // If we reach the target, return the number of steps
-                if (current[0] == end[0] && current[1] == end[1]) {
-                    return steps;
-                }
+                if((top[0] + "," + top[1]).equals(target)) return res ;
+                // System.out.println("res:" + res);
 
-                // Explore all four directions
-                for (int[] dir : directions) {
-                    int newRow = current[0] + dir[0];
-                    int newCol = current[1] + dir[1];
-
-                    // Check if the new position is valid and not blocked
-                    if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n &&
-                        !visited[newRow][newCol] && forest.get(newRow).get(newCol) >= 1) {
-                        queue.offer(new int[]{newRow, newCol});
-                        visited[newRow][newCol] = true; // Mark as visited
-                    }
-                }
+                int row = top[0];
+                int col = top[1];
+                // Check left
+                if (col - 1 >= 0 && !visited[row][col - 1] && matrix[row][col - 1] >= 1) 
+                    {toVisit.offer(new int[]{row, col - 1}); visited[row][col - 1] = true;}
+                // Check right
+                if (col + 1 < matrix[0].length && !visited[row][col + 1] && matrix[row][col + 1] >= 1) 
+                    {toVisit.offer(new int[]{row, col + 1}); visited[row][col + 1] = true;}
+                // Add up and down checks if needed
+                if (row - 1 >= 0 && !visited[row - 1][col] && matrix[row - 1][col] >= 1) 
+                    {toVisit.offer(new int[]{row - 1, col}); visited[row - 1][col] = true;}
+                if (row + 1 < matrix.length && !visited[row + 1][col] && matrix[row + 1][col] >= 1) 
+                    {toVisit.offer(new int[]{row + 1, col}); visited[row + 1][col] = true;}
             }
-            steps++; // Increment steps after processing each level
+            res++;
         }
-
-        // If the target is not reachable, return -1
         return -1;
     }
 }
