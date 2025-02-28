@@ -1,36 +1,45 @@
 class Solution {
     public String shortestCommonSupersequence(String str1, String str2) {
-        int str1Length = str1.length();
-        int str2Length = str2.length();
-
-        String[]prevRow = new String[str2Length+1];
-        for(int col = 0; col <= str2Length; col++) {
-            prevRow[col] = str2.substring(0, col);
-        }
-            
-
-        //fill the dp table row by row
-        for(int row = 1; row <= str1Length; row++){
-            String[] currRow = new String[str2Length + 1];
-            currRow[0] = str1.substring(0, row);
-
-            for(int col = 1; col <= str2Length; col++){
-                if(str1.charAt(row - 1) == str2.charAt(col - 1)){
-                    currRow[col] = prevRow[col - 1] + str1.charAt(row - 1);
+        int[][] dp = new int[str1.length() + 1][str2.length() + 1];
+        
+        // Initialize dp table
+        for (int i = 1; i <= str1.length(); i++) {
+            for (int j = 1; j <= str2.length(); j++) {
+                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
-                    //if characters do not match, choose the shorter super sequence
-                    //from previous row(exclude current str1 char)
-                    String pickS1 = prevRow[col];
-                    String pickS2 = currRow[col - 1];
-
-                    currRow[col] = (pickS1.length() < pickS2.length())? 
-                        pickS1 + str1.charAt(row - 1)
-                        : pickS2 + str2.charAt(col - 1);
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
-            // move to the next row(update previous row reference)
-            prevRow = currRow;
         }
-        return prevRow[str2Length];
+
+        int i = str1.length();
+        int j = str2.length();
+        StringBuilder sb = new StringBuilder();
+                while (i > 0 && j > 0) {
+            if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                sb.append(str1.charAt(i - 1));
+                i--;
+                j--;
+            } else if (dp[i - 1][j] > dp[i][j - 1]) {
+                sb.append(str1.charAt(i - 1));
+                i--;
+            } else {
+                sb.append(str2.charAt(j - 1));
+                j--;
+            }
+        }
+
+        // Append the remaining characters from str1 or str2
+        while (i > 0) {
+            sb.append(str1.charAt(i - 1));
+            i--;
+        }
+        while (j > 0) {
+            sb.append(str2.charAt(j - 1));
+            j--;
+        }
+
+        return sb.reverse().toString();
     }
 }
