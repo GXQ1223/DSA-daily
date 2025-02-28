@@ -27,14 +27,15 @@ class Solution {
         }
 
         for(int c = 0; c < n; c++){
-            if(cols[c]) continue;
             if(!cols[c] && !ups[row + c] && !dns[c - row + n - 1]){
                 matrix[row][c] = 1;
                 rows[row] = true;
                 cols[c] = true;
                 ups[row + c] = true;
                 dns[c - row + n - 1] = true;
+
                 backtrack(row+1,matrix, rows, cols, ups, dns, n);
+
                 matrix[row][c] = 0;
                 rows[row] = false;
                 cols[c] = false;
@@ -42,8 +43,6 @@ class Solution {
                 dns[c - row + n - 1] = false;
             }
         }
-        
-
     }
 
     public List<String> makingList(int[][]matrix){
@@ -55,7 +54,6 @@ class Solution {
                 sb.append(matrix[i][j] == 1 ? 'Q' : '.');
             res.add(sb.toString());
         }
-        // System.out.println("list: " + res);
         return res;
     }
 }
