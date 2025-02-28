@@ -29,7 +29,7 @@ class Solution {
 
         for(int c = 0; c < matrix.length; c++){
             if(cols[c]) continue;
-            if(matrix[row][c] == 0 && !rows[row] && !cols[c] && !ups[row + c] && !dns[c - row + matrix.length - 1]){
+            if(!cols[c] && !ups[row + c] && !dns[c - row + matrix.length - 1]){
                 matrix[row][c] = 1;
                 rows[row] = true;
                 cols[c] = true;
