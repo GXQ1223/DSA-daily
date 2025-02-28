@@ -21,26 +21,25 @@ class Solution {
         int[][]matrix, 
         boolean[]rows, boolean[]cols, 
         boolean[]ups, boolean[]dns, int n){
-        // System.out.println("; n:" + n);
-        if(row == matrix.length){
+        if(row == n){
             res.add(makingList(matrix));
             return;
         }
 
-        for(int c = 0; c < matrix.length; c++){
+        for(int c = 0; c < n; c++){
             if(cols[c]) continue;
-            if(!cols[c] && !ups[row + c] && !dns[c - row + matrix.length - 1]){
+            if(!cols[c] && !ups[row + c] && !dns[c - row + n - 1]){
                 matrix[row][c] = 1;
                 rows[row] = true;
                 cols[c] = true;
                 ups[row + c] = true;
-                dns[c - row + matrix.length - 1] = true;
-                backtrack(row+1,matrix, rows, cols, ups, dns, n-1);
+                dns[c - row + n - 1] = true;
+                backtrack(row+1,matrix, rows, cols, ups, dns, n);
                 matrix[row][c] = 0;
                 rows[row] = false;
                 cols[c] = false;
                 ups[row + c] = false;
-                dns[c - row + matrix.length - 1] = false;
+                dns[c - row + n - 1] = false;
             }
         }
         
