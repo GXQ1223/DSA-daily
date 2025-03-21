@@ -1,30 +1,50 @@
 class Solution {
     public List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
-        Set<String>res = new HashSet<>();
-        Set<String>set = new HashSet<>();
-        for(String supply: supplies) set.add(supply);
-        int sum = 1;
-        while(sum > 0){
-            sum = 0;
-            for(int i = 0; i < recipes.length; i++){
-                String recipe = recipes[i];
-                boolean all = true;
-                for(String ingredient:ingredients.get(i)){
-                    if(!set.contains(ingredient)){
-                        all = false; break;
-                    }
-                }
-                if(all && !res.contains(recipe)){
-                    res.add(recipe);
-                    set.add(recipe);
-                    sum++;
-                } 
+        List<String> res = new ArrayList<>();
+        int n = recipes.length;
+        
+        Set<String> availability = new HashSet<>();
+        for (String s : supplies) {
+            availability.add(s);
+        }
+
+        Map<String, Integer> recipeToIndex = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            recipeToIndex.put(recipes[i], i);
+        }
+        
+        boolean[] visited = new boolean[n];
+        for (String recipe : recipes) {
+            if (checkRecipe(recipe, recipeToIndex, ingredients, availability, visited)) {
+                res.add(recipe);
+            }
+        }
+        
+        return res;
+    }
+
+    private boolean checkRecipe(String recipe, Map<String, Integer> recipeToIndex,
+                                List<List<String>> ingredients, Set<String> availability, boolean[] visited) {
+        if (availability.contains(recipe)) {
+            return true;
+        }
+
+        if (!recipeToIndex.containsKey(recipe) || visited[recipeToIndex.get(recipe)]) {
+            return false;
+        }
+        int i = recipeToIndex.get(recipe);
+        if (visited[i]) {
+            return false;
+        }
+
+        visited[i] = true;
+        for (String ingre : ingredients.get(i)) {
+            if (!checkRecipe(ingre, recipeToIndex, ingredients, availability, visited)) {
+                return false;
             }
         }
 
-        List<String>result = new ArrayList<>();
-        for(String s: res)result.add(s);
-        
-        return result;
+        availability.add(recipe);
+        return true;
     }
 }
