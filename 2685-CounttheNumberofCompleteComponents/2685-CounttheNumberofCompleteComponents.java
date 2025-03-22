@@ -1,3 +1,4 @@
+// Last updated: 3/21/2025, 9:28:31 PM
 class Solution {
     public int countCompleteComponents(int n, int[][] edges) {
         // step1: find all scc; use a list to hold all the connected vertices 
