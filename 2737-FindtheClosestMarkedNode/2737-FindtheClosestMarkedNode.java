@@ -1,4 +1,4 @@
-// Last updated: 3/21/2025, 10:07:28 PM
+// Last updated: 3/21/2025, 10:10:04 PM
 class Solution {
     public int minimumDistance(int n, List<List<Integer>> edges, int s, int[] marked) {
         Set<Integer> markedSet = new HashSet<>();
@@ -14,22 +14,18 @@ class Solution {
         while(move > 0){
             move = 0;
             for(int i = 0; i < edges.size(); i++){
-                // if(visitedEdge[i]) continue;
                 List<Integer>edge = edges.get(i);
                 int start = edge.get(0);
                 int end = edge.get(1);
-                // if(visited[start] && !visitedEdge[i]){ // to search
-                    visitedEdge[i] = true;
-                    int weight = edge.get(2);
-                    // move++; 
-                    visited[end] = true;
-                    int prev = dist[end];
-                    dist[end] = Math.min(dist[start] + weight, dist[end]);
-                    if(prev != dist[end]) move++;
-                    // System.out.println("Start: " + start + " ;end: " + end + " ;dist[end]: " + dist[end]);
-                    if(markedSet.contains(end))
-                        res = (res < 0) ? dist[end] : Math.min(res, dist[end]);
-                // }
+                visitedEdge[i] = true;
+                int weight = edge.get(2);
+                visited[end] = true;
+                int prev = dist[end];
+                dist[end] = Math.min(dist[start] + weight, dist[end]);
+                if(prev != dist[end]) move++;
+                else continue;
+                if(markedSet.contains(end))
+                    res = (res < 0) ? dist[end] : Math.min(res, dist[end]);
             }
         }
         return res == (Integer.MAX_VALUE / 2) ? -1: res;
