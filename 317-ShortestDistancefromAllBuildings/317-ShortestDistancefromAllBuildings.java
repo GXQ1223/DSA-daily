@@ -1,4 +1,4 @@
-// Last updated: 4/1/2025, 1:26:34 AM
+// Last updated: 4/1/2025, 1:35:09 AM
 class Solution {
     int m;
     int n;
@@ -11,7 +11,6 @@ class Solution {
         n = grid[0].length;
         int[][]score = new int[m][n];
         visited = new boolean[m][n];
-        steps = new int[m][n];
         directions = new int[][]{{0,-1}, {-1,0}, {0,1}, {1,0}};
         int res = Integer.MAX_VALUE;
         buildings = 0;
@@ -41,33 +40,39 @@ class Solution {
     public int bfs(int i, int j , int[][]grid){
         for(int k = 0; k < m; k++) {
             Arrays.fill(visited[k], false);
-            Arrays.fill(steps[k], 0);
         }
         int res = 0;
         int building = 0;
         Queue<int[]>q = new LinkedList<>();
         q.offer(new int[]{i, j});
         visited[i][j] = true;
-        while(!q.isEmpty()){
-            int[]cur = q.poll();
-            for(int[]dir: directions){
-                int row = cur[0]+dir[0];
-                int col = cur[1]+dir[1];
-                if(row >= 0 && row < m && col >= 0 && col < n){
-                    if(!visited[row][col] && grid[row][col] == 0){
-                        q.offer(new int[]{row, col}); visited[row][col] = true; steps[row][col] = steps[cur[0]][cur[1]] + 1;
-                    } else if (grid[row][col] == 1 && !visited[row][col]){
-                        res += steps[cur[0]][cur[1]] + 1;
-                        visited[row][col] = true;
-                        building++;
-                        // System.out.println("updated res: " + res);
-                        // System.out.println("updated building: " + building);
+        int steps = 0;
+        while(!q.isEmpty() && building != buildings){
+            int size = q.size();
+            while(size>0){
+                int[]cur = q.poll();
+                size--;
+                for(int[]dir: directions){
+                    int row = cur[0]+dir[0];
+                    int col = cur[1]+dir[1];
+                    if(row >= 0 && row < m && col >= 0 && col < n){
+                        if(!visited[row][col] && grid[row][col] == 0){
+                            q.offer(new int[]{row, col}); 
+                            visited[row][col] = true; 
+                        } else if (grid[row][col] == 1 && !visited[row][col]){
+                            res += steps + 1;
+                            visited[row][col] = true;
+                            building++;
+                            // System.out.println("updated res: " + res);
+                            // System.out.println("updated building: " + building);
+                        }
                     }
                 }
             }
+            steps++;
         }
         // System.out.println("res: " + res);
-        return (res == 0 || building < buildings) ? -1: res;
+        return (res == 0 || building < buildings) ? Integer.MAX_VALUE: res;
     }
 }
 
