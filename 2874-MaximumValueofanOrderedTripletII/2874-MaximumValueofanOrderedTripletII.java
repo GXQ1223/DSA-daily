@@ -1,4 +1,4 @@
-// Last updated: 4/3/2025, 12:05:22 AM
+// Last updated: 4/3/2025, 12:05:49 AM
 class Solution {
     public long maximumTripletValue(int[] nums) {
         int n = nums.length;
@@ -15,7 +15,7 @@ class Solution {
 
         long res = 0;
         for(int i = 1; i <= n-2; i++)
-            res = Math.max(res, (pref[i] - (long)nums[i]) * suff[i]);
+            res = Math.max(res, (long)(pref[i] - nums[i]) * suff[i]);
         
         return res;
     }
