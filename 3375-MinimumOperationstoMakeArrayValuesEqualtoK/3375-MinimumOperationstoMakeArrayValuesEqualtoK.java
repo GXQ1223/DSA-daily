@@ -1,10 +1,8 @@
-// Last updated: 4/8/2025, 9:17:11 PM
+// Last updated: 4/8/2025, 9:19:36 PM
 class Solution {
     public int minOperations(int[] nums, int k) {
-        Arrays.sort(nums);
-        if(k > nums[0])return -1;
-        Set<Integer>set = new HashSet<>();
-        for(int i: nums)set.add(i);
-        return k == nums[0]? set.size() - 1 : set.size() ;
+        Set<Integer>set = new HashSet<>(); boolean yes = false;
+        for(int i: nums){set.add(i); if(i < k) return -1; if(i == k) yes = true;}
+        return yes? set.size() - 1 : set.size() ;
     }
 }
