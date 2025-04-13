@@ -1,29 +1,22 @@
-// Last updated: 4/12/2025, 11:52:02 PM
+// Last updated: 4/12/2025, 11:53:09 PM
 class Solution {
     public int countGoodNumbers(long n) {
-        int MOD = 1000000007;
-        long res = 1; //when n is 1, place 0 can only be 2,4,6,8
-
-        if(n % 2 == 1) res *= 5;
-        while(n > 1){
-            long s = 1;
-            int exp = 0;
-            while(s * 2 <= n){
-                s *= 2; exp++;
-            }
-            // System.out.println("exp: " + exp);
-            long r = 20;
-            int i = 1;
-            for(i = 1; i < exp; i++){
-                r *= r; r %= MOD;
-            }
-            if(i >= 1) {res *= r; res %= MOD;}
-
-
-            // System.out.println("s: " + s + ";exp: " + exp + ";r: " + r + ";res: " + res);
-
-            n -= s;
-        }
-        return (int)res;
+        long even = (n+1)/2;
+        long odd = (n/2);
+        
+        return (int)((exp(5,even)*exp(4,odd))%(1000000007));
+    }
+    public long exp(long base, long p)
+    {
+     int mod = 1000000007;
+     long result = 1;
+     while(p>0)
+     {
+        if((p&1)==1)
+            result = (result*base)%mod;
+        p>>= 1;
+        base = (base*base)%mod;
+     }
+    return result;
     }
 }
