@@ -1,4 +1,4 @@
-// Last updated: 4/12/2025, 11:51:47 PM
+// Last updated: 4/12/2025, 11:51:54 PM
 class Solution {
     public int countGoodNumbers(long n) {
         int MOD = 1000000007;
@@ -20,7 +20,7 @@ class Solution {
             if(i >= 1) {res *= r; res %= MOD;}
 
 
-            System.out.println("s: " + s + ";exp: " + exp + ";r: " + r + ";res: " + res);
+            // System.out.println("s: " + s + ";exp: " + exp + ";r: " + r + ";res: " + res);
 
             n -= s;
         }
