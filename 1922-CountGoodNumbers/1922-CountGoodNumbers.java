@@ -1,4 +1,4 @@
-// Last updated: 4/12/2025, 11:53:09 PM
+// Last updated: 4/12/2025, 11:53:11 PM
 class Solution {
     public int countGoodNumbers(long n) {
         long even = (n+1)/2;
