@@ -1,4 +1,4 @@
-// Last updated: 4/15/2025, 10:00:54 PM
+// Last updated: 4/15/2025, 10:06:16 PM
 class Solution {
 
     public long countGood(int[] nums, int k) {
