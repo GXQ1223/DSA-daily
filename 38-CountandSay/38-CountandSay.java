@@ -1,4 +1,4 @@
-// Last updated: 4/17/2025, 9:01:54 PM
+// Last updated: 4/17/2025, 9:02:06 PM
 class Solution {
     public String countAndSay(int n) {
         if(n == 1)return "1";
@@ -14,14 +14,14 @@ class Solution {
                 Character cur = sb.charAt(i);
                 int count = 0;
                 while(i < sb.length() && sb.charAt(i) == cur){
-                    System.out.print("j: " + j + "; count: " + count + "; i: " + i + "; char: " + sb.charAt(i));
+                    // System.out.print("j: " + j + "; count: " + count + "; i: " + i + "; char: " + sb.charAt(i));
                     count++; i++;
-                    System.out.println("; j: " + j + "; count: " + count + "; i: " + i );
+                    // System.out.println("; j: " + j + "; count: " + count + "; i: " + i );
                 }
                 if(count >= 1)i--;
                 res.append((char)(count + '0')).append(cur);
             }
-            System.out.println("res: " + res.toString() + ";");
+            // System.out.println("res: " + res.toString() + ";");
             sb.delete(0, sb.length());
             sb.append(res);
             if(j == n-1) return res.toString();
