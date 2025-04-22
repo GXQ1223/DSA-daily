@@ -1,4 +1,4 @@
-// Last updated: 4/22/2025, 12:15:42 AM
+// Last updated: 4/22/2025, 12:15:51 AM
 class Solution {
     public int minArea(char[][] image, int x, int y) {
         int m = image.length, n = image[0].length;
@@ -14,8 +14,7 @@ class Solution {
                 }
             }
         }
-        System.out.println("maxx: " + maxx + "; maxy: " + maxy + "; minx: " + minx + "; miny: " + miny);
+        // System.out.println("maxx: " + maxx + "; maxy: " + maxy + "; minx: " + minx + "; miny: " + miny);
         return (maxx + 1 - minx) * (maxy + 1 - miny);
-
     }
 }
