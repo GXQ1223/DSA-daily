@@ -1,4 +1,4 @@
-// Last updated: 4/22/2025, 12:15:51 AM
+// Last updated: 4/22/2025, 12:16:07 AM
 class Solution {
     public int minArea(char[][] image, int x, int y) {
         int m = image.length, n = image[0].length;
