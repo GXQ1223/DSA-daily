@@ -1,4 +1,4 @@
-// Last updated: 5/4/2025, 12:23:01 PM
+// Last updated: 5/4/2025, 12:23:03 PM
 class Solution {
     public int numEquivDominoPairs(int[][] dominoes) {
         int[] freq = new int[100];
