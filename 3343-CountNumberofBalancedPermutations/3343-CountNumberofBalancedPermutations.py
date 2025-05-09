@@ -1,4 +1,4 @@
-# Last updated: 5/8/2025, 8:42:19 PM
+# Last updated: 5/8/2025, 8:45:50 PM
 class Solution:
     def countBalancedPermutations(self, num: str) -> int:
         total = sum(int(ch) for ch in num)
@@ -14,4 +14,5 @@ class Solution:
             for j in range(0, cnt[i] + 1):
                 res += comb(odd, j) * comb(even, cnt[i] - j) * dfs(i-1, odd - j, even - cnt[i] + j, balance - i * j)
             return res % 1000000007
+            
         return 0 if total % 2 else dfs(9, len(num) - len(num) // 2, len(num) // 2, total // 2)
