@@ -1,19 +1,15 @@
-# Last updated: 5/10/2025, 10:42:49 AM
-def works(spell: int, potions: List[int], target: int) -> int:
-    left, right = 0, len(potions) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if potions[mid] * spell < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return left
-
+# Last updated: 5/10/2025, 11:17:52 AM
 class Solution:
-    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
-        potions.sort()
-        res = []
-        for spell in spells:
-            res.append(len(potions) - works(spell, potions, success))
-        return res
+    def hIndex(self, citations: List[int]) -> int:
+        left, right = 0, len(citations) - 1 
+        if citations[-1] == 0:
+            return 0
+        while left <= right:
+            mid = (left + right) // 2
+            if citations[mid] >= len(citations) - mid:
+                right = mid - 1
+            else:
+                left = mid + 1
+        print("left, right:",left,"; " ,right)
+        return len(citations) - left
         
