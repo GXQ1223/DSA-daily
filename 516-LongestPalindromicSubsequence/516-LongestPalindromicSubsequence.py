@@ -1,4 +1,4 @@
-# Last updated: 5/30/2025, 2:37:33 PM
+# Last updated: 5/30/2025, 2:37:42 PM
 class Solution:
     def mergeStones(self, stones: List[int], k: int) -> int:
         n = len(stones)
@@ -7,7 +7,7 @@ class Solution:
         pref[0] = stones[0]
         for i in range(n):
             pref[i+1] = pref[i] + stones[i]
-        print("pref: " , pref)
+        # print("pref: " , pref)
         
         @cache
         def dfs(i,j):
