@@ -1,4 +1,4 @@
-# Last updated: 5/30/2025, 4:27:26 PM
+# Last updated: 5/30/2025, 4:27:48 PM
 class Solution:
     def longestPalindrome(self, word1: str, word2: str) -> int:
         # make sure there is no repeat
@@ -14,18 +14,18 @@ class Solution:
 
         # total_word = word1 + word2
         @cache
-        def dfs(i, j, word):
+        def dfs(i, j):
             if i > j: return 0
             if i == j: return 1
             if word[i] == word[j]:
-                return dfs(i+1, j-1, word) + 2
-            return max(dfs(i, j-1, word), dfs(i+1, j, word))
+                return dfs(i+1, j-1) + 2
+            return max(dfs(i, j-1), dfs(i+1, j))
         word = word1 + word2
         res = 0
         for char in ascii_lowercase:
             i = word1.find(char)
             j = word2.rfind(char)
-            if i != -1 and j != -1: res = max(res, dfs(i, j + len(word1), word))
+            if i != -1 and j != -1: res = max(res, dfs(i, j + len(word1)))
         return res
 
 
