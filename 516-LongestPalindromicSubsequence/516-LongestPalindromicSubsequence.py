@@ -1,4 +1,4 @@
-# Last updated: 5/30/2025, 2:37:45 PM
+# Last updated: 5/30/2025, 2:37:47 PM
 class Solution:
     def mergeStones(self, stones: List[int], k: int) -> int:
         n = len(stones)
