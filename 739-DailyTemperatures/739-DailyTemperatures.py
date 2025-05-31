@@ -1,4 +1,4 @@
-# Last updated: 5/31/2025, 3:49:56 PM
+# Last updated: 5/31/2025, 3:51:04 PM
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         n = len(temperatures)
@@ -18,12 +18,8 @@ class Solution:
         # res.reverse()
         # return res
 
-        stack = [0]
-        res = [0] * n
+        stack, res = [0], [0] * n
         for i in range(1, n):
-            if not stack: 
-                stack.append(i)
-                continue
             while stack and temperatures[i] > temperatures[stack[-1]]:
                 res[stack[-1]] = i - stack[-1]
                 stack.pop()
