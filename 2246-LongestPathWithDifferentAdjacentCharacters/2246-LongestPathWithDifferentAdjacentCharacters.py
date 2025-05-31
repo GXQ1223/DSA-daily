@@ -1,4 +1,4 @@
-# Last updated: 5/31/2025, 3:03:09 PM
+# Last updated: 5/31/2025, 3:03:15 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -7,6 +7,7 @@
 #         self.right = right
 class Solution:
     def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        @cache
         def dfs(root):
             if root is None: return inf, 0, 0
             # three conditions: blue yellow and red
