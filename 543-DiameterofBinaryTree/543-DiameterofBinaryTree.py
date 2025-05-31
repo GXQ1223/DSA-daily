@@ -1,4 +1,4 @@
-# Last updated: 5/31/2025, 2:19:46 PM
+# Last updated: 5/31/2025, 2:20:02 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -15,7 +15,7 @@ class Solution:
             sel_left, nosel_left = dfs(x.left)[0], dfs(x.left)[1]
             sel_right, nosel_right = dfs(x.right)[0], dfs(x.right)[1]
 
-            nosel_res = max(max(sel_left + sel_right, nosel_left + nosel_right), max(sel_left + nosel_right, sel_right +nosel_left))
+            nosel_res = max(sel_left, nosel_left) + max(sel_right, nosel_right)
             sel_res = nosel_left + nosel_right + x.val
             return sel_res, nosel_res
         res = dfs(root)
