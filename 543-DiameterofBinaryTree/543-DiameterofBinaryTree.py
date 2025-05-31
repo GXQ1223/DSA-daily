@@ -1,4 +1,4 @@
-# Last updated: 5/31/2025, 11:34:34 AM
+# Last updated: 5/31/2025, 11:34:59 AM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -9,6 +9,7 @@ class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         res = -1001
 
+        @cache
         def dfs(node):
             if node is None: return -1001
             nonlocal res
