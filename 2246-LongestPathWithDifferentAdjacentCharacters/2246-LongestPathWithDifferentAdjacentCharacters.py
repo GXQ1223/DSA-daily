@@ -1,21 +1,46 @@
-# Last updated: 5/31/2025, 3:03:20 PM
+# Last updated: 5/31/2025, 3:04:46 PM
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
-    def minCameraCover(self, root: Optional[TreeNode]) -> int:
-        @cache
-        def dfs(root):
-            if root is None: return inf, 0, 0
-            # three conditions: blue yellow and red
-            l_blue, l_yellow, l_red = dfs(root.left)
-            r_blue, r_yellow, r_red = dfs(root.right)
-            blue = 1 + min(min(l_blue, l_yellow), l_red) + min(min(r_blue, r_yellow), r_red)
-            yellow = min(l_blue, l_red) + min(r_blue, r_red)
-            red = min(min(l_blue + min(r_blue, r_red), r_blue + min(l_blue, l_red)), l_blue + r_blue)
-            return blue, yellow, red
-        res = dfs(root)
-        return min(res[0], res[2])
+    def minCameraCover(self, root):
+        ret_val = 0
+        node_to_is_cameraed_map = {None: False}
+        node_to_is_monitored_map = {None: True}
+
+        def is_leaf_node(node):
+            if (node is None):
+                return False
+
+            return node.left is None and node.right is None
+        
+        def dfs(node):
+            nonlocal ret_val
+            nonlocal node_to_is_cameraed_map
+            nonlocal node_to_is_monitored_map
+            
+            if (is_leaf_node(node)):
+                node_to_is_cameraed_map[node] = False
+                node_to_is_monitored_map[node] = False
+                return
+
+            if (node.left is not None):
+                dfs(node.left)
+            if (node.right is not None):
+                dfs(node.right)
+
+            node_to_is_cameraed_map[node] = False
+            node_to_is_monitored_map[node] = True if (node_to_is_cameraed_map[node.left] or node_to_is_cameraed_map[node.right]) else False
+            if (not node_to_is_monitored_map[node.left] or not node_to_is_monitored_map[node.right]):
+                node_to_is_cameraed_map[node] = True
+                node_to_is_monitored_map[node] = True
+                ret_val += 1
+
+        dfs(root)
+        ret_val += 1 if (not node_to_is_monitored_map[root]) else 0
+
+        return ret_val
