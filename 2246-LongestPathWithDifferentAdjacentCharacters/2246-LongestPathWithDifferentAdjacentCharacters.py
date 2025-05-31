@@ -1,0 +1,41 @@
+# Last updated: 5/31/2025, 1:52:09 PM
+class Solution:
+    def minimumDiameterAfterMerge(self, edges1: List[List[int]], edges2: List[List[int]]) -> int:
+
+        def graph(edges):
+            g = [[] for _ in range(len(edges) + 1)]
+            for edge in edges:
+                g[edge[0]].append(edge[1])
+                g[edge[1]].append(edge[0])
+            return g
+        g1, g2 = graph(edges1), graph(edges2)
+
+
+        # need to find the starting points first
+        def fd(g, start):
+            max_depth = 0
+            visited = set([start])
+            def dfs(x, depth):
+                nonlocal visited
+                nonlocal max_depth
+                nonlocal start
+                if depth > max_depth:
+                    max_depth = depth
+                    start = x
+                for y in g[x]:
+                    if y in visited:
+                        continue
+                    visited.add(y)
+                    dfs(y, depth + 1)
+            dfs(start, 0)
+            return start, max_depth
+                    
+        start1, _ = fd(g1, 0)
+        start2, _ = fd(g2, 0)
+
+        end1, d1 = fd(g1, start1)
+        end2, d2 = fd(g2, start2)
+
+
+        return max((d1 + 1)//2 + (d2 + 1)//2 + 1, max(d1, d2))
+        
