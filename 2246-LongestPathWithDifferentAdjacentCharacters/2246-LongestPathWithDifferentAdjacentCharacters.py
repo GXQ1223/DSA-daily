@@ -1,32 +1,21 @@
-# Last updated: 5/31/2025, 1:55:55 PM
+# Last updated: 5/31/2025, 3:02:27 PM
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def minimumDiameterAfterMerge(self, edges1: List[List[int]], edges2: List[List[int]]) -> int:
-        def graph(edges):
-            g = [[] for _ in range(len(edges) + 1)]
-            for edge in edges:
-                g[edge[0]].append(edge[1])
-                g[edge[1]].append(edge[0])
-            return g
-        g1, g2 = graph(edges1), graph(edges2)
-
-        # need to find the starting points first
-        def fd(g, start):
-            max_depth = 0
-            visited = set([start])
-            def dfs(x, depth):
-                nonlocal start, visited, max_depth
-                if depth > max_depth:
-                    max_depth = depth
-                    start = x
-                for y in g[x]:
-                    if y in visited:
-                        continue
-                    visited.add(y)
-                    dfs(y, depth + 1)
-            dfs(start, 0)
-            return start, max_depth    
-        #get max diameters for both trees  
-        (start1, _), (start2, _) = fd(g1, 0), fd(g2, 0)
-        (_, d1), (_, d2) = fd(g1, start1), fd(g2, start2)
-        return max((d1 + 1)//2 + (d2 + 1)//2 + 1, max(d1, d2))
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        def dfs(root):
+            if root is None: return inf, 0, 0
+            # three conditions: blue yellow and red
+            l_blue, l_yellow, l_red = dfs(root.left)
+            r_blue, r_yellow, r_red = dfs(root.right)
+            blue = 1 + min(min(l_blue, l_yellow), l_red) + min(min(r_blue, r_yellow), r_red)
+            yellow = min(l_blue, l_red) + min(r_blue, r_red)
+            red = min(min(l_blue + min(r_blue, r_red), r_blue + min(l_blue, l_red)), l_blue + r_blue)
+            return blue, yellow, red
+        res = dfs(root)
+        return min(res[0], res[2])
         
