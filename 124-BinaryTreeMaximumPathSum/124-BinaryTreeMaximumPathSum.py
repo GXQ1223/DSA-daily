@@ -1,4 +1,4 @@
-# Last updated: 5/31/2025, 12:59:04 PM
+# Last updated: 5/31/2025, 12:59:27 PM
 class TreeNode:
     def __init__(self, val = None, children = None):
         self.val = val
@@ -18,7 +18,7 @@ class Solution:
 
         res = 1
 
-        
+        @cache
         def dfs(node):
             if node is None:
                 return -1
