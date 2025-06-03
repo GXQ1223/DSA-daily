@@ -1,4 +1,4 @@
-# Last updated: 6/2/2025, 10:55:56 PM
+# Last updated: 6/2/2025, 10:56:00 PM
 class Solution:
     def maxCandies(self, status: List[int], candies: List[int], keys: List[List[int]], containedBoxes: List[List[int]], initialBoxes: List[int]) -> int:
         n = len(status)
@@ -16,7 +16,7 @@ class Solution:
                 q.append(box)
                 visited[box] = True
                 res += candies[box]
-        print(q)
+        # print(q)
         # print("keyset: ",keyset)
         
         while(q):
