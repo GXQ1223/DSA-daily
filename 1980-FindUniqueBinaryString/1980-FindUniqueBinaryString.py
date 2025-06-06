@@ -1,24 +1,29 @@
-# Last updated: 6/6/2025, 3:49:44 PM
+# Last updated: 6/6/2025, 3:50:25 PM
+from collections import Counter
+
 class Solution:
     def minimumOperations(self, nums: List[int]) -> int:
-        counter = Counter(nums)
-        n = len(nums)
-        freq = 0
-        for c in counter:
-            if counter[c] > 1:
-                freq += 1
+        
+        # digits = [i for i in range(1, 101)]
+        # counts = Counter(nums)
 
-        if freq == 0: return 0
+        # steps = 0
+        # while True:
+        #     if all(counts[d] < 2 for d in digits):
+        #         return steps
+            
+        #     steps += 1
+        #     for num in nums[:3]:
+        #         counts[num] -= 1
+            
+        #     nums = nums[3:]
 
-        res, cur = 0, 0
-        while cur < n:
-            res += 1
-            for i in range(0,3):
-                counter[nums[cur + i]] -= 1
-                if counter[nums[cur + i]] == 1:
-                    freq -= 1
-                    if freq == 0:
-                        return res
-            cur += 3
+        ans = 0
 
-        return res + 1
+        unique = set(nums)
+        while len(unique) != len(nums):
+            nums = nums[3:]
+            unique = set(nums)
+            ans += 1
+
+        return ans
