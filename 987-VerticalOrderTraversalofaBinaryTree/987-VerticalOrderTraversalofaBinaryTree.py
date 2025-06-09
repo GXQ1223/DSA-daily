@@ -1,4 +1,4 @@
-# Last updated: 6/9/2025, 1:44:37 PM
+# Last updated: 6/9/2025, 1:49:42 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -20,15 +20,13 @@ class Solution:
         dfs(root, 0, 0)
         ord = 0
         res2 = []
+        ord = -1000
+        while not res[ord]:
+            ord += 1
         while True:
             if not res[ord]:
                 break
             res2.append(sorted(res[ord]))
             ord += 1
-        ord = -1
-        while True:
-            if not res[ord]:
-                break
-            res2.insert(0, sorted(res[ord]))
-            ord -= 1
+
         return [[r[1] for r in group] for group in res2]
