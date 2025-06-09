@@ -1,10 +1,15 @@
-# Last updated: 6/9/2025, 3:28:42 PM
+# Last updated: 6/9/2025, 3:29:37 PM
+from typing import List
 class Solution:
     def cycleLengthQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         res = []
-        for x,y in queries:
-            res.append(1)
-            while x != y:
-                x,y = min(x,y), max(x,y) // 2
-                res[-1] += 1
+        for a, b in queries:
+            length = 1
+            while a != b:
+                if a > b:
+                    a = a // 2
+                else:
+                    b = b // 2
+                length += 1
+            res.append(length)
         return res
