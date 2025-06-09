@@ -1,4 +1,4 @@
-# Last updated: 6/9/2025, 3:18:53 PM
+# Last updated: 6/9/2025, 3:19:06 PM
 class Solution:
     def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
         allow = defaultdict(set)
@@ -12,7 +12,7 @@ class Solution:
                 return
             for s1 in build(s, [], 0):
                 if ok:
-                    return True
+                    return
                 dfs(s1)
                 
         def build(s, lst, i=0):
