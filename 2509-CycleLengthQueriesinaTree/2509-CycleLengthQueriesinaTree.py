@@ -1,4 +1,4 @@
-# Last updated: 6/9/2025, 3:28:37 PM
+# Last updated: 6/9/2025, 3:28:42 PM
 class Solution:
     def cycleLengthQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         res = []
