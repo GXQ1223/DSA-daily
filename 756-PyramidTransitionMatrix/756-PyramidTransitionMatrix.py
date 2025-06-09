@@ -1,4 +1,4 @@
-# Last updated: 6/9/2025, 3:17:26 PM
+# Last updated: 6/9/2025, 3:18:53 PM
 class Solution:
     def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
         allow = defaultdict(set)
@@ -11,9 +11,10 @@ class Solution:
                 ok = True
                 return
             for s1 in build(s, [], 0):
-                dfs(s1)
                 if ok:
                     return True
+                dfs(s1)
+                
         def build(s, lst, i=0):
             if i == len(s) - 1:
                 yield "".join(lst)
