@@ -1,4 +1,4 @@
-# Last updated: 6/9/2025, 3:29:37 PM
+# Last updated: 6/9/2025, 3:29:42 PM
 from typing import List
 class Solution:
     def cycleLengthQueries(self, n: int, queries: List[List[int]]) -> List[int]:
