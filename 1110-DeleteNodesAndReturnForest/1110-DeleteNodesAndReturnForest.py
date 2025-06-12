@@ -1,4 +1,4 @@
-# Last updated: 6/12/2025, 4:22:55 PM
+# Last updated: 6/12/2025, 4:24:14 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -13,20 +13,17 @@ class Solution:
         def dfs(node):
             nonlocal q
             if not node:
-                return None
+                return node
             if node.val in to_delete:
-                # print("ahah")
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
                 return None
-            node.left = dfs(node.left)
-            node.right = dfs(node.right)
+            node.left, node.right = dfs(node.left), dfs(node.right)
             return node
 
         while q:
-            # print("q: ",q)
             cur = q.popleft()
             cur = dfs(cur)
             if cur:
