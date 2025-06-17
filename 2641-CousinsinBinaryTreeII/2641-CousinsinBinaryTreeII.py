@@ -1,4 +1,4 @@
-# Last updated: 6/17/2025, 4:38:08 PM
+# Last updated: 6/17/2025, 4:38:16 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -18,7 +18,6 @@ class Solution:
                 if cur.left: q.append(cur.left)
                 if cur.right: q.append(cur.right)
             depth_sums.append(depthsum)
-        print(depth_sums) 
 
         def dfs(node, lvl):
             if not node: return
