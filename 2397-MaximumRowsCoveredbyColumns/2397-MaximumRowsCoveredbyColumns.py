@@ -1,13 +1,10 @@
-# Last updated: 6/18/2025, 2:06:12 PM
+# Last updated: 6/18/2025, 2:06:33 PM
 class Solution:
     def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
         m,n = len(matrix),len(matrix[0])
 
         # current problem: whether selecting col[i] or not
         def dfs(i, selected, covered):
-            # print("i: ",i)
-            # print("selected: ",selected)
-            # print("covered: ",covered)
             if i >= n:
                 return len(covered)
             if len(selected) == numSelect:
