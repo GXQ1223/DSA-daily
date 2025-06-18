@@ -1,4 +1,4 @@
-# Last updated: 6/18/2025, 3:03:54 PM
+# Last updated: 6/18/2025, 3:04:24 PM
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         # current problem: put s[i] in current number or make it the start of a new number
@@ -11,13 +11,11 @@ class Solution:
         def dfs(i, path):
             nonlocal ans
             # print("i: ", i, " ;path: ", path)
-            if len(path) > 4 or i > len(s) or (path and int(path[-1]) > 255):
-                return
+            if len(path) > 4 or i > len(s) or (path and int(path[-1]) > 255):return
+            if len(path) < 4 and i == len(s):return
             if len(path) == 4 and i == len(s):
                 st = ".".join(path)
                 ans.add(st)
-                return
-            if len(path) < 4 and i == len(s):
                 return
             path.append(s[i])
             dfs(i+1, path)
