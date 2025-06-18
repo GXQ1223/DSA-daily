@@ -1,4 +1,4 @@
-# Last updated: 6/18/2025, 2:52:46 PM
+# Last updated: 6/18/2025, 3:02:19 PM
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         # current problem: put s[i] in current number or make it the start of a new number
@@ -15,8 +15,7 @@ class Solution:
                 return
             if len(path) == 4 and i == len(s):
                 st = ".".join(path)
-                if len(st) == len(s) + 3:
-                    ans.add(st)
+                ans.add(st)
                 return
             if len(path) < 4 and i == len(s):
                 return
@@ -25,8 +24,7 @@ class Solution:
                 dfs(i+1, path)
                 path.pop()
 
-                if path:
-                    # print("new way: ",int((path[-1]) * 10))
+                if path and path[-1] != "0":
                     temp = path[-1]
                     path[-1] = str(int(path[-1]) * 10)
                     dfs(i+1, path)
@@ -35,7 +33,7 @@ class Solution:
                 path.append(s[i])
                 dfs(i+1, path)
                 path.pop()
-                if path:
+                if path and path[-1] != "0":
                     temp = path[-1]
                     path[-1] = str(int(path[-1]) * 10 + int(s[i]))
                     dfs(i+1, path)
