@@ -1,4 +1,4 @@
-# Last updated: 6/23/2025, 5:48:33 PM
+# Last updated: 6/23/2025, 5:48:49 PM
 class Solution:
     def lengthOfLongestSubsequence(self, w: List[int], target: int) -> int:
         # how to use dfs?
