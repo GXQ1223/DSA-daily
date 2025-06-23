@@ -1,4 +1,4 @@
-# Last updated: 6/23/2025, 4:28:25 PM
+# Last updated: 6/23/2025, 4:28:29 PM
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
