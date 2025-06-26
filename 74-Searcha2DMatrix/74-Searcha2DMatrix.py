@@ -1,4 +1,4 @@
-# Last updated: 6/25/2025, 8:40:02 PM
+# Last updated: 6/25/2025, 8:40:19 PM
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         m, n = len(matrix), len(matrix[0])
@@ -20,7 +20,7 @@ class Solution:
         while l <= r:
             mid = (l+r)//2
             print("matrix[row][mid]: ", matrix[row][mid])
-            if matrix[row][mid] == target or matrix[row][l] == target or matrix[row][r] == target:
+            if matrix[row][mid] == target or matrix[row][l] == target:
                 return True
             elif matrix[row][mid] < target:
                 l = mid+1
