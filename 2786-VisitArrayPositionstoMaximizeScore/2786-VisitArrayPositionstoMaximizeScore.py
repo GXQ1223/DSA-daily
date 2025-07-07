@@ -1,4 +1,4 @@
-# Last updated: 7/7/2025, 6:51:41 PM
+# Last updated: 7/7/2025, 6:51:44 PM
 class Solution:
     def maxScore(self, nums: List[int], x: int) -> int:
         n = len(nums)
