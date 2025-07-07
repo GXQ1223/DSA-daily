@@ -1,4 +1,4 @@
-# Last updated: 7/7/2025, 6:50:25 PM
+# Last updated: 7/7/2025, 6:50:44 PM
 class Solution:
     def maxScore(self, nums: List[int], x: int) -> int:
         # max_even, max_odd = -inf, -inf
@@ -27,13 +27,7 @@ class Solution:
         
 
         n = len(nums)
-        # even = [0] * n
-        # odd = [0] * n
-        # even[0] = -inf if nums[0] % 2 else nums[0]
-        # odd[0] = -inf if not nums[0] % 2 else nums[0]
         max_even, max_odd = -inf if nums[0] % 2 else nums[0], -inf if not nums[0] % 2 else nums[0]
-        # print(even)
-        # print(odd)
         res = max(max_even, max_odd)
         for i in range(1, n):
             if not nums[i] % 2:
