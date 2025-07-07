@@ -1,4 +1,4 @@
-# Last updated: 7/7/2025, 7:06:38 PM
+# Last updated: 7/7/2025, 7:06:49 PM
 class Solution:
     def maxAlternatingSum(self, nums: List[int]) -> int:
         n = len(nums)
@@ -12,5 +12,4 @@ class Solution:
             diff = max(max_minus, temp_plus - nums[i])
             max_minus = max(max_minus, diff)
         return max(max_plus, max_minus)
-        
                 
