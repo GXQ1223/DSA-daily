@@ -1,4 +1,4 @@
-# Last updated: 7/7/2025, 7:06:09 PM
+# Last updated: 7/7/2025, 7:06:21 PM
 class Solution:
     def maxAlternatingSum(self, nums: List[int]) -> int:
         n = len(nums)
