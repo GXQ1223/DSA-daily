@@ -1,4 +1,4 @@
-# Last updated: 7/7/2025, 6:50:20 PM
+# Last updated: 7/7/2025, 6:50:25 PM
 class Solution:
     def maxScore(self, nums: List[int], x: int) -> int:
         # max_even, max_odd = -inf, -inf
