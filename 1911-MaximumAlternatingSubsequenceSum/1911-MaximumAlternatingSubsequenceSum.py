@@ -1,14 +1,27 @@
-# Last updated: 7/7/2025, 7:11:27 PM
-from typing import List
-
+# Last updated: 7/7/2025, 7:11:38 PM
 class Solution:
     def maxAlternatingSum(self, nums: List[int]) -> int:
-        even = 0  # Max alternating sum ending in an even position
-        odd = 0   # Max alternating sum ending in an odd position
-
-        for num in nums:
-            new_even = max(even, odd + num)
-            new_odd = max(odd, even - num)
-            even, odd = new_even, new_odd
         
-        return even  # Result is always stored in `even`
+        """
+        goingDown is meant to represent that it is waiting to
+        go down as we want to maximize the sum so we want to
+        maximize adds and minimize subtractions
+        """
+        goingDown = True
+        ans = 0
+        
+        for idx in range(len(nums)-1):
+            if goingDown and nums[idx]>=nums[idx+1]:
+                ans += nums[idx]
+                goingDown = not goingDown
+            elif not goingDown and nums[idx]<=nums[idx+1]:
+                ans -= nums[idx]
+                goingDown = not goingDown
+
+        if not goingDown:
+            return ans
+        return ans + nums[-1]
+
+
+
+
