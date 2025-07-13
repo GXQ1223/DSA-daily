@@ -1,4 +1,4 @@
-# Last updated: 7/13/2025, 2:53:04 PM
+# Last updated: 7/13/2025, 2:53:25 PM
 class Solution:
     def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
         players.sort()
@@ -9,6 +9,7 @@ class Solution:
                 i -= 1
                 j -= 1
                 res += 1
-            else: j -= 1
+            else:
+                j -= 1
         return res
         
