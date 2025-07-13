@@ -1,4 +1,4 @@
-# Last updated: 7/13/2025, 2:53:32 PM
+# Last updated: 7/13/2025, 2:56:50 PM
 class Solution:
     def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
         players.sort()
@@ -7,9 +7,7 @@ class Solution:
         while i >= 0 and j >= 0 :
             if players[j] <= trainers[i]:
                 i -= 1
-                j -= 1
                 res += 1
-            else:
-                j -= 1
+            j -= 1
         return res
         
