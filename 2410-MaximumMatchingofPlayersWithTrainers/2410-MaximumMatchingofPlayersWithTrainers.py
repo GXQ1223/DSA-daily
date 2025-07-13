@@ -1,16 +1,14 @@
-# Last updated: 7/13/2025, 2:52:17 PM
+# Last updated: 7/13/2025, 2:53:04 PM
 class Solution:
     def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
         players.sort()
-        players.reverse()
         trainers.sort()
-        trainers.reverse()
-        i,j,res = 0,0,0
-        while i < len(trainers) and j < len(players):
+        i,j,res = len(trainers) - 1,len(players) - 1,0
+        while i >= 0 and j >= 0 :
             if players[j] <= trainers[i]:
-                i += 1
-                j += 1
+                i -= 1
+                j -= 1
                 res += 1
-            else: j += 1
+            else: j -= 1
         return res
         
