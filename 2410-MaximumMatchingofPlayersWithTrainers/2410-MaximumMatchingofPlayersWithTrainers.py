@@ -1,4 +1,4 @@
-# Last updated: 7/13/2025, 2:53:25 PM
+# Last updated: 7/13/2025, 2:53:29 PM
 class Solution:
     def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
         players.sort()
