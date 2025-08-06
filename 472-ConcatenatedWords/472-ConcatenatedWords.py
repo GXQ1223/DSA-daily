@@ -1,8 +1,8 @@
-# Last updated: 8/6/2025, 4:10:07 PM
+# Last updated: 8/6/2025, 4:10:30 PM
 class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         word_set = set(words)
-        res = set()
+        res = []
         @cache
         def can_form(i, word, length):
             if i == len(word):
@@ -14,8 +14,6 @@ class Solution:
             return False
         for word in words:
             if can_form(0, word, 0):
-                res.add(word)
+                res.append(word)
         
-        return list(res)
-
-        
+        return res
