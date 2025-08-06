@@ -1,4 +1,4 @@
-# Last updated: 8/6/2025, 4:10:30 PM
+# Last updated: 8/6/2025, 4:10:33 PM
 class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         word_set = set(words)
