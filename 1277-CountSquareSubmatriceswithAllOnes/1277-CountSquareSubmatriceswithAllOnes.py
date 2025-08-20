@@ -1,4 +1,4 @@
-# Last updated: 8/20/2025, 1:23:13 AM
+# Last updated: 8/20/2025, 1:31:32 AM
 class Solution:
     def countSquares(self, matrix: List[List[int]]) -> int:
         res = sum(sum(x) for x in matrix)
@@ -16,3 +16,4 @@ class Solution:
                         change = True
                         res += 1
         return res
+        
