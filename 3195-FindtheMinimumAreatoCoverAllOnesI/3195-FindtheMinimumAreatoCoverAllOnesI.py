@@ -1,8 +1,7 @@
-# Last updated: 8/22/2025, 10:56:01 AM
+# Last updated: 8/22/2025, 10:56:31 AM
 class Solution:
     def minimumArea(self, grid: List[List[int]]) -> int:
-        min_row, min_col = inf, inf
-        max_row, max_col = -inf, -inf
+        min_row, min_col, max_row, max_col = inf, inf, -inf, -inf
         m,n = len(grid), len(grid[0])
         for i in range(m):
             for j in range(n):
