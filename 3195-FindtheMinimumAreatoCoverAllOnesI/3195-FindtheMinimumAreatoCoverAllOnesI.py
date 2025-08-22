@@ -1,20 +1,25 @@
-# Last updated: 8/22/2025, 10:57:58 AM
+# Last updated: 8/22/2025, 11:00:29 AM
 class Solution:
     def minimumArea(self, grid: List[List[int]]) -> int:
-        l=[0,0]
-        b=[float('inf'),0]
-        f1=True
-        for i in range(len(grid)):
-            if 1 in grid[i]:
-                if f1:
-                    l[0]=i
-                    f1=False
-                l[1]=i
-            else:
-                continue
-            c=grid[i][::-1]
-            b[0]=min(b[0],grid[i].index(1))
-            b[1]=max(b[1],len(grid[i])-c.index(1))
-        l=l[1]-l[0]+1
-        b=b[1]-b[0]
-        return l*b
+        minRow = len(grid)
+        maxRow = -1
+        minColumn = len(grid[0])
+        maxColumn = -1
+        
+        for x, row in enumerate(grid):
+            for y, val in enumerate(row):
+                if val == 1:
+                    if x < minRow:
+                        minRow = x
+                    if x > maxRow:
+                        maxRow = x
+                    if y < minColumn:
+                        minColumn = y
+                    if y > maxColumn:
+                        maxColumn = y
+        print("maxC", maxColumn)
+        print("minC", minColumn)
+        print("maxR", maxRow)
+        print("minR", minRow)
+        return (maxColumn - minColumn + 1) * (maxRow - minRow + 1)
+        
