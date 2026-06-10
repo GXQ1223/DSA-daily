@@ -1,17 +1,26 @@
-# Last updated: 6/9/2026, 9:26:07 PM
+# Last updated: 6/9/2026, 10:45:15 PM
 1class Solution:
-2    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-3        counter = {}
-4        for i in nums:
-5            if counter.get(i) is None:
-6                counter[i] = 0
-7            counter[i] += 1
-8        pairs = []
-9        for key in counter.keys():
-10            pairs.append((counter[key], key))
-11        pairs.sort(key = lambda a : (-a[0]))
-12        res = []
-13        for i in range(k):
-14            res.append(pairs[i][1])
-15        return res
-16        
+2    def longestConsecutive(self, nums: List[int]) -> int:
+3        s = {x:i for i,x in enumerate(nums)}
+4        counted = {x:False for x in nums}
+5        print(s)
+6        print(counted)
+7        result = 0
+8        for key in s:
+9            if counted.get(key) == True:
+10                continue
+11            #find the smallest ele in the seq
+12            smallest = key
+13            while s.get(smallest-1) is not None:
+14                smallest -= 1
+15            print("smallest: ", smallest)
+16            # find longest seq
+17            largest = smallest
+18            length = 0
+19            while s.get(largest) is not None:
+20                counted[largest] = True
+21                largest += 1
+22                length += 1
+23            result = max(result, length)
+24        return result
+25
